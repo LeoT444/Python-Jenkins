@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Iniciando Build...'
-                sh 'docker build -t imagemdaora:latest ./app/'
+                sh 'sudo docker build -t imagemdaora:latest ./app/'
             }
         }
        
