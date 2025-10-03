@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Iniciando Build...'
-                sh 'docker build -t jenkins:latest ./app'
+                sh 'docker build -t imagemdaora:latest ./app'
             }
         }
        
@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo 'Executando Testes...'
                 sh '''
-                    docker run --rm jenkins:latest python test_app.py
+                    docker run --rm imagemdaora:latest python test_app.py
                 '''
             }
         }
@@ -22,9 +22,9 @@ pipeline {
             steps {
                 echo 'Realizando Deploy...'
                 sh '''
-                    docker stop jenkins || true
-                    docker rm jenkins || true
-                    docker run -d --name jenkins -p 80:80 jenkins:latest
+                    docker stop imagemdaora || true
+                    docker rm imagemdaora || true
+                    docker run -d --name imagemdaora -p 80:80 imagemdaora:latest
                 '''
             }
         }
