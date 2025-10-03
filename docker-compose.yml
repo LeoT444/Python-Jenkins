@@ -4,6 +4,7 @@ services:
   jenkins:
     image: jenkins/jenkins:lts
     user: admin
+    password: "123456"
     ports:
       - "8080:8080"
     volumes:
