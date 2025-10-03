@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    user: root
+    ports:
+      - "8080:8080"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - app-net
+
+  app:
+    build: ./app
+    ports:
+      - "80:80"
+    networks:
+      - app-net
+
+volumes:
+  jenkins_home:
+
+networks:
+  app-net

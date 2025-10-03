@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Pipeline CI/CD Demo</h1>
+        <p>Aplicação com Jenkins + Nginx + Python API</p>
+       
+        <button onclick="testAPI()">Testar API Status</button>
+        <button onclick="testHello()">Testar API Hello</button>
+       
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function testAPI() {
+            const result = document.getElementById('result');
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                result.style.display = 'block';
+                result.innerHTML = `<strong>Resultado:</strong> ${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                result.style.display = 'block';
+                result.innerHTML = `<strong>Erro:</strong> ${error.message}`;
+            }
+        }
+
+        async function testHello() {
+            const result = document.getElementById('result');
+            try {
+                const response = await fetch('/api/hello/Jenkins');
+                const data = await response.json();
+                result.style.display = 'block';
+                result.innerHTML = `<strong>Resultado:</strong> ${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                result.style.display = 'block';
+                result.innerHTML = `<strong>Erro:</strong> ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
