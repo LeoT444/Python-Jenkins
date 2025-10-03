@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Iniciando Build...'
-                sh 'docker build -t pipeline-python:latest ./app'
+                sh 'docker build -t jenkins:latest ./app'
             }
         }
        
@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo 'Executando Testes...'
                 sh '''
-                    docker run --rm pipeline-python:latest python test_app.py
+                    docker run --rm jenkins:latest python test_app.py
                 '''
             }
         }
@@ -22,9 +22,9 @@ pipeline {
             steps {
                 echo 'Realizando Deploy...'
                 sh '''
-                    docker stop pipeline-python || true
-                    docker rm pipeline-python || true
-                    docker run -d --name pipeline-python -p 80:80 pipeline-python:latest
+                    docker stop jenkins || true
+                    docker rm jenkins || true
+                    docker run -d --name jenkins -p 80:80 jenkins:latest
                 '''
             }
         }
